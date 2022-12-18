@@ -120,9 +120,52 @@ elseif game.PlaceId == 10674065190 then
 local Window = OrionLib:MakeWindow({Name = "Killergoogs Hub︱ CANDY 🍬 Clicker Run!", HidePremium = false, IntroText = "Killergoogs Hub", SaveConfig = true, ConfigFolder = "KillergoogsHUBCFG"})
 
 -- Values
+_G.farmHome = true
+_G.farmTundra = true
+_G.farmMagma = true
+_G.farmSpace = true
 _G.farmCandy = true
 
 -- Functions
+function farmHome()
+    while _G.farmHome == true do
+        local x = -221.09
+        local y = 10029.4
+        local z = -406158
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x, y, z)
+        wait(.00000000001)
+	end
+end
+
+function farmTundra()
+    while _G.farmTundra == true do
+        local x = 478.588
+        local y = 10029.4
+        local z = -406158
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x, y, z)
+        wait(.00000000001)
+	end
+end
+
+function farmMagma()
+    while _G.farmMagma == true do
+        local x = 1125.96
+        local y = 10029.4
+        local z = -406158
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x, y, z)
+        wait(.00000000001)
+	end
+end
+
+function farmSpace()
+    while _G.farmSpace == true do
+        local x = 1729.09
+        local y = 10029.4
+        local z = -406158
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x, y, z)
+        wait(.00000000001)
+	end
+end
 
 function farmCandy()
     while _G.farmCandy == true do
@@ -132,7 +175,16 @@ function farmCandy()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(x, y, z)
         wait(.00000000001)
 	end
-	end
+end
+
+function antiAfk()
+	local vu = game:GetService("VirtualUser")
+	game:GetService("Players").LocalPlayer.Idled:connect(function()
+		vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+		wait(1)
+		vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+	end)	
+end
 
 -- Tabs
 local Auto = Window:MakeTab({
@@ -140,7 +192,52 @@ local Auto = Window:MakeTab({
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
+
+local Misc = Window:MakeTab({
+	Name = "Misc",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
 -- Toggles
+
+Auto:AddLabel("Only Use 1 At A Time")
+
+Auto:AddToggle({
+	Name = "Farm Home World",
+	Default = false,
+	Callback = function(Value)
+		_G.farmHome = Value
+		farmHome()
+	end    
+})
+
+Auto:AddToggle({
+	Name = "Farm Tundra World",
+	Default = false,
+	Callback = function(Value)
+		_G.farmTundra = Value
+		farmTundra()
+	end    
+})
+
+Auto:AddToggle({
+	Name = "Farm Magma World",
+	Default = false,
+	Callback = function(Value)
+		_G.farmMagma = Value
+		farmMagma()
+	end    
+})
+
+Auto:AddToggle({
+	Name = "Farm Space World",
+	Default = false,
+	Callback = function(Value)
+		_G.farmSpace = Value
+		farmSpace()
+	end    
+})
+
 Auto:AddToggle({
 	Name = "Farm Candy World",
 	Default = false,
@@ -148,6 +245,20 @@ Auto:AddToggle({
 		_G.farmCandy = Value
 		farmCandy()
 	end    
+})
+
+-- Button
+
+Misc:AddButton({
+	Name = "Anti-Afk",
+	Callback = function()
+		local vu = game:GetService("VirtualUser")
+		game:GetService("Players").LocalPlayer.Idled:connect(function()
+			vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+			wait(1)
+			vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+		end)
+  	end    
 })
 
 end
